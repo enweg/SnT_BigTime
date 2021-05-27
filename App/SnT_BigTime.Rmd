@@ -207,7 +207,7 @@ The next step in any analysis would be to build and estimate a model. We will do
 Given that we do not want to change any of the standard settings, we can estimate a model by calling `sparseVAR(Y)` where `Y` is the matrix containing our data (each variable/index is one column). 
 
 ```{r}
-# mod <- bigtime::sparseVAR(df.rv.raw)
+# mod <- bigtime::sparseVAR(df.rv.raw, selection = "cv")
 # saveRDS(mod, "./Data/rv_mod.RDS")
 mod <- readRDS("./Data/rv_mod.RDS")
 ```
@@ -231,7 +231,7 @@ It is important to note though, that choosing the SE optimal penalisation is oft
 
 ```{r}
 renderPlot({
-  bigtime::plot_cv(mod, "VAR")
+  bigtime::plot_cv(mod)
 })
 ```
 
@@ -240,7 +240,7 @@ The fourth question can be investigated by calling `lagmatrix` and setting the `
 
 ```{r}
 renderPlot({
-  lagmat <- bigtime::lagmatrix(mod, "VAR", returnplot = TRUE)
+  lagmat <- bigtime::lagmatrix(mod, returnplot = TRUE)
 }, height = 600)
 ```
 

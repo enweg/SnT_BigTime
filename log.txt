@@ -1,0 +1,187 @@
+
+Listening on http://127.0.0.1:4808
+
+
+
+processing file: SnT_BigTime.Rmd
+output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmpScxP8l/SnT_BigTime.knit.md
+
+
+Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmpScxP8l/file15059408602d4.html
+Warning in plot.xy(xy, type, ...) :
+  plot type 'VAR' will be truncated to first character
+Warning: Error in plot.xy: invalid plot type 'V'
+  174: plot.xy
+  173: plot.default
+  171: bigtime::plot_cv [/Users/enricowegner/Google Drive/Current Projects/Ines/Github/bigtime/R/plot_cv.R#13]
+  170: renderPlot [<text>#2]
+  168: func
+  128: drawPlot
+  114: <reactive:plotObj>
+   98: drawReactive
+   85: renderFunc
+   84: output$out39a99ac6fee3eef4
+    4: <Anonymous>
+    2: rmarkdown::run
+    1: start_document [#2]
+Warning: Error in bigtime::lagmatrix: unused argument ("VAR")
+  170: renderPlot [<text>#2]
+  168: func
+  128: drawPlot
+  114: <reactive:plotObj>
+   98: drawReactive
+   85: renderFunc
+   84: output$out1dde29b10e331df6
+    4: <Anonymous>
+    2: rmarkdown::run
+    1: start_document [#2]
+Warning: Error in <-: length of 'dimnames' [2] not equal to array extent
+  171: colnames<-
+  170: renderPlot [<text>#27]
+  168: func
+  128: drawPlot
+  114: <reactive:plotObj>
+   98: drawReactive
+   85: renderFunc
+   84: output$outff8e86cdf40f42c2
+    4: <Anonymous>
+    2: rmarkdown::run
+    1: start_document [#2]
+Warning: Using alpha for a discrete variable is not advised.
+Warning in plot.xy(xy, type, ...) :
+  plot type 'VAR' will be truncated to first character
+Warning: Error in plot.xy: invalid plot type 'V'
+  174: plot.xy
+  173: plot.default
+  171: bigtime::plot_cv [/Users/enricowegner/Google Drive/Current Projects/Ines/Github/bigtime/R/plot_cv.R#13]
+  170: renderPlot [<text>#2]
+  168: func
+  128: drawPlot
+  114: <reactive:plotObj>
+   98: drawReactive
+   85: renderFunc
+   84: output$out39a99ac6fee3eef4
+    4: <Anonymous>
+    2: rmarkdown::run
+    1: start_document [#2]
+Warning: Error in bigtime::lagmatrix: unused argument ("VAR")
+  170: renderPlot [<text>#2]
+  168: func
+  128: drawPlot
+  114: <reactive:plotObj>
+   98: drawReactive
+   85: renderFunc
+   84: output$out1dde29b10e331df6
+    4: <Anonymous>
+    2: rmarkdown::run
+    1: start_document [#2]
+
+
+
+processing file: SnT_BigTime.Rmd
+output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmpScxP8l/SnT_BigTime.knit.md
+
+
+Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmpScxP8l/file1505933ae9a67.html
+Warning: Error in bigtime::lagmatrix: unused argument ("VAR")
+  170: renderPlot [<text>#2]
+  168: func
+  128: drawPlot
+  114: <reactive:plotObj>
+   98: drawReactive
+   85: renderFunc
+   84: output$out5b3d24fdbd8e9e80
+    4: <Anonymous>
+    2: rmarkdown::run
+    1: start_document [#2]
+Warning: Using alpha for a discrete variable is not advised.
+
+
+
+processing file: SnT_BigTime.Rmd
+output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmpScxP8l/SnT_BigTime.knit.md
+
+
+Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmpScxP8l/file150592a399b87.html
+Warning: Using alpha for a discrete variable is not advised.
+
+
+Warning message:
+In sink() : no sink to remove
+Downloading GitHub repo ineswilms/bigtime@development
+Installing 14 packages: fansi, pillar, tidyselect, tibble, colorspace, viridisLite, farver, cpp11, dplyr, isoband, RcppArmadillo, tidyr, ggplot2, corrplot
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/pillar_1.6.1.tgz'
+Content type 'application/x-gzip' length 1011711 bytes (987 KB)
+==================================================
+downloaded 987 KB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/tidyselect_1.1.1.tgz'
+Content type 'application/x-gzip' length 198800 bytes (194 KB)
+==================================================
+downloaded 194 KB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/tibble_3.1.2.tgz'
+Content type 'application/x-gzip' length 803690 bytes (784 KB)
+==================================================
+downloaded 784 KB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/colorspace_2.0-1.tgz'
+Content type 'application/x-gzip' length 2608831 bytes (2.5 MB)
+==================================================
+downloaded 2.5 MB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/viridisLite_0.4.0.tgz'
+Content type 'application/x-gzip' length 1296423 bytes (1.2 MB)
+==================================================
+downloaded 1.2 MB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/farver_2.1.0.tgz'
+Content type 'application/x-gzip' length 1950011 bytes (1.9 MB)
+==================================================
+downloaded 1.9 MB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/cpp11_0.2.7.tgz'
+Content type 'application/x-gzip' length 194061 bytes (189 KB)
+==================================================
+downloaded 189 KB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/dplyr_1.0.6.tgz'
+Content type 'application/x-gzip' length 1255997 bytes (1.2 MB)
+==================================================
+downloaded 1.2 MB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/isoband_0.2.4.tgz'
+Content type 'application/x-gzip' length 3710533 bytes (3.5 MB)
+==================================================
+downloaded 3.5 MB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/tidyr_1.1.3.tgz'
+Content type 'application/x-gzip' length 959468 bytes (936 KB)
+==================================================
+downloaded 936 KB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/ggplot2_3.3.3.tgz'
+Content type 'application/x-gzip' length 4068756 bytes (3.9 MB)
+==================================================
+downloaded 3.9 MB
+
+trying URL 'https://cran.rstudio.com/bin/macosx/contrib/4.0/corrplot_0.88.tgz'
+Content type 'application/x-gzip' length 3879412 bytes (3.7 MB)
+==================================================
+downloaded 3.7 MB
+
+installing the source packages ‘fansi’, ‘RcppArmadillo’
+
+trying URL 'https://cran.rstudio.com/src/contrib/fansi_0.5.0.tar.gz'
+Content type 'application/x-gzip' length 301724 bytes (294 KB)
+==================================================
+downloaded 294 KB
+
+trying URL 'https://cran.rstudio.com/src/contrib/RcppArmadillo_0.10.5.0.0.tar.gz'
+Content type 'application/x-gzip' length 1669395 bytes (1.6 MB)
+==================================================
+downloaded 1.6 MB
+
+
+The downloaded source packages are in
+	‘/private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmpScxP8l/downloaded_packages’
