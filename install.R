@@ -1,0 +1,6 @@
+install.packages("vars")
+install.packages("shiny")
+install.packages("tidyverse")
+install.packages("mapproj")
+install.packages("maps")
+install.packages("bigtime")
