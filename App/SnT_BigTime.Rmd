@@ -43,7 +43,7 @@ High dimensional settings come with a special set of problems, which we will dis
 
 ## Why not estimate a normal VAR
 
-Why do we not just estimate a VAR like we did in the other [notebook](https://github.com/enweg/SnT_VARS)? There are multiple reasons for this. The first is that in some cases we just cannot estimate the VAR like we did previously. This happens whenever we have more parameters to estimate in one equation than we have observations. So this happens whenever $k*p > T$. The second reasons involves something that is known as the *Variance-Bias trade-off*. 
+Why do we not just estimate a VAR like we did in the other [notebook](https://github.com/enweg/SnT_VARS)? There are multiple reasons for this. The first is that in some cases we just cannot estimate the VAR like we did previously. This happens whenever we have more parameters to estimate in one equation than we have observations. So this happens whenever $k*p > T$. The second reason involves something that is known as the *Variance-Bias trade-off*. 
 
 What we are usually interested in is to minimise the *Mean Squared Error (MSE)* defined by 
 
