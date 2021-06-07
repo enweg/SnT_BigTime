@@ -1,5 +1,5 @@
 ---
-title: "Understanding BigTime big time!"
+title: "An Introduction to High-Dimensional VectorAutoregressions using *bigtime*"
 output: 
   html_document:
     theme: NULL
@@ -56,7 +56,7 @@ The MSE can, however, be decomposed into two parts as shown above The first is t
 
 ::: {.info}
 
-The above representation of the MSE is only valid for scalars. In VARs we do not estimate a single parameter though. Instead we estimate the matrices $\Phi^{(j)}$ for $j = 1, ..., p$. We can summarise all these parameters in the block matrix $\Phi = [\Phi^{(1)} ... \Phi^{(p)}]$ and make a vector out of it by applying the *vec* operator (see [wikipedia](https://en.wikipedia.org/wiki/Vectorization_(mathematics)){target="_blank"}). Thus, in the VAR case, we have $\theta = vec(\Phi)$, which essentially just stacks the columns of $\Phi$ above each other. Using this parameterisation, the MSE is defined as
+The above representation of the MSE is only valid for scalars. In VARs we do not estimate a single parameter though. Instead we estimate the matrices $\Phi^{(j)}$ for $j = 1, ..., p$. We can summarise all these parameters in the block matrix $\Phi = [\Phi^{(1)} ... \Phi^{(p)}]$ and make a vector out of it by applying the *vec* operator (see [wikipedia](https://en.wikipedia.org/wiki/Vectorization_(mathematics)){target="_blank"}). Thus, in the VAR case, we have $\theta = vec(\Phi)$, which essentially just stacks the columns of $\Phi$ above each other. Using this parametrisation, the MSE is defined as
 
 $$
 \begin{array}{ll}
@@ -151,7 +151,7 @@ Now that we have set out what high-dimensional problems are, and have discussed 
 
 *bigtime* is better suited for our time series setting, because it implements the *elementwise* sparsity pattern discussed above, and uses a time series cross validation procedure to find the optimal penalty parameter. *bigtime* does even more. It also helps decide on the maximum lags that should be included, and automatically decides on which penalty parameters should be tried in the time series cross validation procedure; *bigtime* therefore provides a *data driven* approach to building Vector AutoRegressive models. It is therefore a great tool for a quick first exploration of the data, but also for more detailed use cases as all of the settings are variable. 
 
-In the example below, we will use *bigtime* to investigate the realtionship between the realised valatilities of various stock indices. 
+In the example below, we will use *bigtime* to investigate the relationship between the realised volatilities of various stock indices. 
     
 ## Example: Realised log-Volatilities
 
@@ -159,7 +159,7 @@ In the example below, we will use *bigtime* to investigate the realtionship betw
 
 **Case Description**
 
-In the example for this notebook we are looking at realised volatilities of various stock market indices. Realised Volatilities (RVs) are basically just the summed squared returns of some asset, here the stock indices. The sum is often taken over very short intervals, such as days, hours, or even minutes. RV is extensively used in finance, because it is a good estimator of the latent volatility process underlying the stock returns. It is also of interest to investors and portfolio managers, because knowledge and estimates of the RV can help (1) form better portfolios, (2) hedge portfolios better, and (3) price options better. RV and the connectedness of realised volatilities in various markets, can also be used to gain some knowledge of the fragility of markets. If the realised volatility of markets is vary dependent and connected, then shocks to one market's realised volatility can have a large impact on the realised volatility of another market, and hence diversifying by investing in various markets might not actually work that well. 
+In the example for this notebook we are looking at realised volatilities of various stock market indices. Realised Volatilities (RVs) are basically just the summed squared returns of some asset, here the stock indices. The sum is often taken over very short intervals, such as days, hours, or even minutes. RV is extensively used in finance, because it is a good estimator of the latent volatility process underlying the stock returns. It is also of interest to investors and portfolio managers, because knowledge and estimates of the RV can help (1) form better portfolios, (2) hedge portfolios better, and (3) price options better. RV and the connectedness of realised volatilities in various markets, can also be used to gain some knowledge of the fragility of markets. If the realised volatility of markets is very dependent and connected, then shocks to one market's realised volatility can have a large impact on the realised volatility of another market, and hence diversifying by investing in various markets might not actually work that well. 
 
 You can choose which index you would like to plot below. This can give you first hints on which indices might be connected and which ones might not. We will further investigate this question in the rest of this section.
 
@@ -167,7 +167,7 @@ You can choose which index you would like to plot below. This can give you first
 
 ```{r}
 load("./Data/rv.RData")
-df.rv.raw <- rv$data
+df.rv.raw <- scale(rv$data)
 shiny::varSelectInput("plot_index", 
                       label = "Choose the Index to Plot", 
                       data = df.rv.raw, 
@@ -203,14 +203,72 @@ renderPlot({
 
 **Estimation using *bigtime* **
 
-The next step in any analysis would be to build and estimate a model. We will do this using *bigtime* and more specifically using the *sparseVAR* function. This function implements both, the lasso and the *elementwise* structure above. For reasons also discussed above, we will only focus on the *elementwise* structure. Even then, *sparseVAR* still offers plenty of customisations, such as how many penalties we would like to try in the time series cross-validation procedure, whether we actually want to do time series cross-validation, and how much of the data we would like to use for estimation and how much for testing in the CV. Lastly, *sparseVAR* also offers to determine the forecasting horizon of interest. This will become important for a later section. In this section, we will not change any of the standard settings, since these are settings that a applicable and well performing in most circumstances. 
+The next step in any analysis would be to build and estimate a model. We will do this using *bigtime* and more specifically using the *sparseVAR* function. This function implements both, the lasso and the *elementwise* structure above. For reasons also discussed above, we will only focus on the *elementwise* structure. Even then, *sparseVAR* still offers plenty of customisations, such as how many penalties we would like to try in the time series cross-validation procedure, whether we actually want to do time series cross-validation, and how much of the data we would like to use for estimation and how much for testing in the CV. Lastly, *sparseVAR* also offers to determine the forecasting horizon of interest. This will become important for a later section. In this section, we will not change any of the standard settings besides telling it that we want to do time series cross-validation.
 
-Given that we do not want to change any of the standard settings, we can estimate a model by calling `sparseVAR(Y)` where `Y` is the matrix containing our data (each variable/index is one column). 
+<p style="color:red">
+Below are the results of bootUR. We can see that some series are non-stationary while others are. Differencing only some series might be weird because the interpretation will be rather difficult. Differencing all series might also be weird because quite some are I(0) and we might hence over-difference. Solution might be to work with cointegration but not sure how this would work in a penalised setting. How would you like to continue? You used the data before, how did you handle the non-stationarity? For now I will not do anything.
+</p>
 
 ```{r}
-# mod <- bigtime::sparseVAR(df.rv.raw, selection = "cv")
+# oi <- bootUR::order_integration(df.rv.raw, plot_orders = TRUE)
+# saveRDS(oi, "./Data/oi.RDS")
+oi <- readRDS("./Data/oi.RDS")
+renderPlot({
+  bootUR::plot_order_integration(oi$order_int)
+})
+
+# df.rv.raw <- as_tibble(df.rv.raw) %>% 
+#   mutate_all(.funs = function(x) x-lag(x)) %>% 
+#   drop_na() %>% as.matrix() %>% scale()
+```
+
+
+We can estimate a model by calling `sparseVAR(Y, selection = "cv")` where `Y` is the matrix containing our data (each variable/index is one column) and `selection="cv"` tells the function that we would like to do time series cross-validation. 
+
+```{r}
+# mod <- bigtime::sparseVAR(scale(df.rv.raw), selection = "cv")
 # saveRDS(mod, "./Data/rv_mod.RDS")
 mod <- readRDS("./Data/rv_mod.RDS")
+```
+
+
+The first thing we can then do is to check how our estimated model fits the observed data. This can usually be done by plotting the fitted values, which can be obtained using `fitted(mod)` against observed values. Below is such a plot. Go trough the variables and get a first feeling for how well the model fits the observations.
+
+::: {.control-full-size}
+
+```{r}
+shiny::varSelectInput("fittedvar", 
+                      label = "Select Variable to Show", 
+                      data = mod$Y, 
+                      selected = ".SPX", 
+                      width = "auto")
+```
+
+:::
+
+
+```{r}
+plot_fitted_observed <- function(mod, variable = ".SPX"){
+  fit <- fitted(mod)
+  Observed <- mod$Y[-(1:mod$p), variable]
+  df <- cbind(Observed, fit[, variable])
+  colnames(df) <- c("Observed", "Fitted")
+  as_tibble(df) %>%
+    mutate(Time = mod$p:(n() + mod$p - 1)) %>%
+    pivot_longer(-Time, names_to = "Series", values_to = "Vals") %>%
+    mutate(Series = factor(Series, levels = c("Observed", "Fitted"))) %>%
+    ggplot(aes(Time, Vals)) + 
+    geom_line(aes(color = Series)) + 
+    ylab("") +
+    theme_SnT() +
+    scale_color_um()
+}
+
+renderPlot({
+  variable <- as.character(input$fittedvar)
+  plot_fitted_observed(mod, variable = variable)
+})
+
 ```
 
 
@@ -226,9 +284,9 @@ Even though *bigtime* takes a lot of work from our shoulders, we should still al
 6. How do our fitted values compare to the observed values?
 7. What is the auto- and cross-correlation structure of the residuals?
 
-We can investigate the first three of these questions by calling `plot_cv` on our model. This plots the graph below, which shows the Cross-Validation Error, the MSFE in the Cross Validation procedure, and bars spanning $\pm$ one standard error, for each lambda (the penalty parameter) that was used. The lower vertical line shows the optimal choice, while the second vertical line shows the shows the optimal penalisation when the *one standard deviation rule* is applied (SE optimal). This rule basically states that we should take the most parsimonious (smallest) model we can, that had a MSFE at most one standard deviation higher than the optimal penalisation. 
+We can investigate the first three of these questions by calling `plot_cv` on our model. This plots the graph below, which shows the Cross-Validation Error, the MSFE in the Cross Validation procedure, and bars spanning $\pm$ one standard error, for each lambda (the penalty parameter) that was used. The lower vertical line shows the optimal choice, while the second vertical line shows the optimal penalisation when the *one standard deviation rule* is applied (SE optimal). This rule basically states that we should take the most parsimonious (smallest) model we can, that had a MSFE at most one standard deviation higher than the optimal penalisation. 
 
-It is important to note though, that choosing the SE optimal penalisation is often the right choice, but not always. In some circumstances, the MSFE is very volatile around the SE optimal penalisation and not very volatile around the optimal penalisation. In this case, one should consider choosing the optimal point instead of the SE optimal one. In our case, this does not seem to be the case. Although the MSFE increases to the right of the SE optimal penalisation, it does not increase to abruptly that it would be reason for concern. Obviously, this is very subjective, and different parties might argue differently. One could therefore also run the analysis with both penalisation and see whether the results differ drastically.
+It is important to note though, that choosing the SE optimal penalisation is often the right choice, but not always. In some circumstances, the MSFE is very volatile around the SE optimal penalisation and not very volatile around the optimal penalisation. In this case, one should consider choosing the optimal point instead of the SE optimal one. Here, this does not seem to be the case. Although the MSFE increases to the right of the SE optimal penalisation, it does not increase so abruptly that it would be reason for concern. Obviously, this is very subjective, and different parties might argue differently. One could therefore also run the analysis with both penalisations and see whether the results differ drastically.
 
 ```{r}
 renderPlot({
@@ -236,7 +294,7 @@ renderPlot({
 })
 ```
 
-The fourth question can be investigated by calling `lagmatrix` and setting the `returnplot` argument to `TRUE` This returns the plot that is shown below. The rows in the figure below show the responses, e.g. the equations, while the columns show the predictors. The numbers show how many non-zero coefficients of that predictor are included in each equation. Here, for example, AEX contains three non-zero coefficients of itself (AEX) and only one non-zero coefficient of BFX. Empty cells show cells of predictors whose coefficients were all set to zero in that equation. This could be roughly interpreted as that this predictor does not Granger-Cause the response (if you would like to brush-up on Granger Causality, check out this [notebook](https://github.com/enweg/SnT_VARS){target="_blank"}). For example, all coefficients of the Hang Seng Index (HSI) are zero in the equation for AEX. This could be interpreted as that the HSI does not Granger-Cause AEX and does therefore not contain any information about the future of the realised volatilities of the AEX (after controlling for all the other included variables at all lags). 
+The fourth question can be investigated by calling `lagmatrix` and setting the `returnplot` argument to `TRUE` This returns the plot that is shown below. The rows in the figure below show the responses, e.g. the equations, while the columns show the predictors. The numbers show how many non-zero coefficients of that predictor are included in each equation. Here, for example, AEX (covering the Amsterdam Exchange) contains seven non-zero coefficients of itself (AEX) and only one non-zero coefficient of BVLG (covering the Lisbon Exchange). Empty cells show cells of predictors whose coefficients were all set to zero in that equation. This could be roughly interpreted as that this predictor does not Granger-Cause the response (if you would like to brush-up on Granger Causality, check out this [notebook](https://github.com/enweg/SnT_VARS){target="_blank"}). For example, all coefficients of BVSP (covering the B3 in Brasil) are zero in the equation for AEX. This could be interpreted as that the BVSP does not Granger-Cause AEX and does therefore not contain any information about the future of the realised volatilities of the AEX (after controlling for all the other included variables at all lags). Note that the plot was obtained by using the SE optimal penalisation. We might have obtained somewhat different results - usually more non-zero lags - if we had used the optimal penalisation. 
 
 
 ```{r}
@@ -251,7 +309,7 @@ We thus far answered questions one through four. Question five is equally easy t
 bigtime::is.stable(mod, verbose = TRUE)
 ```
 
-We can answer the sixth questions by calling the `diagnostic_plot` function, which gives us a plot showing the fitted values against the observed values. What we should check here is whether the fitted values represent a good fit to the data, and whether the residuals look like white noise. We will check the second of these in more detail later. Although `diagnostic_plot` gives you the plot only for one selected series, you can easily loop through them. For this interactive notebook, we only show one at a time, but you can select which series you would like to see below. In our opinion, the fitted values look reasonable, and the residuals do not look concerning. Of course, some show outliers which should probably be looked into, but for this demonstration, we will continue withouth further investigation into these outliers.
+We can answer the sixth questions by calling the `diagnostic_plot` function, which gives us a plot showing the fitted values against the observed values. What we should check here is whether the fitted values represent a good fit to the data, and whether the residuals look like white noise. We will check the second of these in more detail later. Although `diagnostic_plot` gives you the plot only for one selected series, you can easily loop through them. For this interactive notebook, we only show one at a time, but you can select which series you would like to see below. In our opinion, the fitted values look reasonable, and the residuals do not look concerning. Of course, some show outliers which should probably be looked into, but for this demonstration, we will continue without further investigation into these outliers.
 
 ::: {.control-full-size}
 
@@ -276,7 +334,7 @@ renderPlot({
 
 Above we discussed the output of `diagnostic_plot` and mentioned that it can already be used to check the assumption of white noise errors. Indeed, it is important to note that although we are using a penalised VAR methodology, we are still making the assumption that errors are white noise.
 
-We can somewhat check the white noise assumption visually by checking auto-correlation and cross-correlation plots. If you select both series below to be the same, then an auto-correlation plot will be shown. The autocorrelation plot shows the correlation between the residual now and $h$ periods ago. What we would like to see, is that none except the first bar is outside the desired confidence band. Similarly, if you select two different series below, e.g. FROM SPX TO AEX, then a cross-correlation plot from SPX to AEX is shown. Here, the correlation between the residual of AEX in this period and the residual of SPX $h$ periods ago is shown. If errors are white noise, then they are allowed to be correlated at the same time point, but not across time. Thus, the first bar is again allowed to fall outside the desired confidence bands, but the others should not. Play around below and check whether all these assumptions are likely to hold in this example.
+We can somewhat check the white noise assumption visually by checking auto-correlation and cross-correlation plots. If you select both series below to be the same, then an auto-correlation plot will be shown. The autocorrelation plot shows the correlation between the residual now and $h$ periods ago. What we would like to see, is that none except the first bar is outside the desired confidence band. Similarly, if you select two different series below, e.g. FROM SPX (S&P500) TO AEX, then a cross-correlation plot from SPX to AEX is shown. Here, the correlation between the residual of AEX in this period and the residual of SPX $h$ periods ago is shown. If errors are white noise, then they are allowed to be correlated at the same time point, but not across time. Thus, the first bar is again allowed to fall outside the desired confidence bands, but the others should not. Play around below and check whether all these assumptions are likely to hold in this example.
 
 ```{r}
 # directly taken from stats::acf implementation
@@ -358,6 +416,82 @@ As we increase the sparsity (increase the penalisation), more and more arcs will
 
 
 ```{r}
+# index.latlong <- list(
+#   .AEX = c(52.370216, 4.895168),
+#   .AORD = c(-33.868820, 151.209290),
+#   .BFX = c(50.850346, 4.351721),
+#   .BSESN = c(19.075983, 72.877655),
+#   .BVLG = c(38.722252, -9.139337),
+#   .BVSP = c(40.741895,-73.989308),
+#   .DJI = c(40.7127281,-74.0060152), 
+#   .FCHI = c(48.8566969,2.3514616), 
+#   .FTMIB = c(45.4668,9.1905), 
+#   .FTSE = c(51.5073219,-0.1276474), 
+#   .GDAXI = c(50.1106444,8.6820917), 
+#   .GSPTSE = c(43.6534817,-79.3839347), 
+#   .HSI = c(22.2793278,114.1628131), 
+#   .IBEX = c(40.4167047,-3.7035825), 
+#   .IXIC = c(40.7127281,-74.0060152), 
+#   .KS11 = c(37.5666791,126.9782914), 
+#   .KSE = c(24.8546842,67.0207055), 
+#   .MXX = c(19.4326296,-99.1331785), 
+#   .N225 = c(35.6828387,139.7594549), 
+#   .NSEI = c(19.0759899,72.8773928), 
+#   .OMXC20 = c(55.6867243,12.5700724), 
+#   .OMXHPI = c(60.1674881,24.9427473), 
+#   .OMXSPI = c(59.3251172,18.0710935), 
+#   .OSEAX = c(59.9133301,10.7389701), 
+#   .RUT = c(40.7127281,-74.0060152), 
+#   .SMSI = c(40.4167047,-3.7035825), 
+#   .SPX = c(40.7127281,-74.0060152), 
+#   .SSEC = c(31.2322758,121.4692071), 
+#   .SSMI = c(47.3744489,8.5410422), 
+#   .STI = c(1.357107,103.8194992), 
+#   .STOXX50E = c(50.1106444,8.6820917)
+# )
+# 
+# mod <- bigtime::sparseVAR(scale(df.rv.raw), selection = "none", VARgran = c(100, 50))
+# data.sets <- NULL
+# for (i in 1:length(mod$lambdas)){
+#   lmbda <- mod$lambdas[[i]]
+#   mod_tmp <- mod
+#   mod_tmp$phi0hat <- mod$phi0hat[, , i]
+#   mod_tmp$Phihat <- mod$Phihat[, , i]
+#   mod_tmp$selection <- "tmp"
+#   lagmat <- bigtime::lagmatrix(mod_tmp, returnplot = FALSE)$LPhi
+#   # dimnames(lagmat) <- list(Response = colnames(data), 
+#   #                        Cause = colnames(data))
+#   laglinks <- 1*(lagmat > 0)
+#   diag(laglinks) <- 0
+#   linked <- which(laglinks == 1)
+#   if (length(linked) == 0) next
+#   linked.from <- ceiling(linked/dim(laglinks)[[1]])
+#   linked.to <- linked%%dim(laglinks)[[1]]
+#   linked.to[linked.to == 0] <- dim(laglinks)[[1]]
+#   df.links <- data.frame(source = colnames(mod$Y)[linked.from], 
+#                          target = colnames(mod$Y)[linked.to],
+#                          importance = lagmat[linked])
+#   latlong.source <- do.call(rbind, index.latlong[df.links$source])
+#   colnames(latlong.source) <- c("Source_lat", "Source_long")
+#   latlong.target <- do.call(rbind, index.latlong[df.links$target])
+#   colnames(latlong.target) <- c("Target_lat", "Target_long")
+#   df <- cbind(df.links, latlong.source, latlong.target)
+#   # Some are linked to the same city. Lets delete those
+#   circle <- which(df$Source_lat == df$Target_lat)
+#   df <- df[-circle, ]
+#   df <- as_tibble(df) %>%
+#     arrange(importance) %>%
+#     mutate(lambda = lmbda)
+#   if (is.null(data.sets)) data.sets <- df
+#   else data.sets <- rbind(data.sets, df)
+#   print(paste("Working: ", round((i)/length(mod$lambdas), 2), "%"))
+# }
+# saveRDS(data.sets, "./Data/network_data.RDS")
+
+```
+
+
+```{r}
 network.df <- readRDS("./Data/network_data.RDS")
 lambdas <- sort(unique(network.df$lambda))
 plot.network <- function(network.df, lmbda){
@@ -422,19 +556,19 @@ sliderInput("network.lmbda",
 # for (h in 1:horizon){
 #   est_data <- df.rv.raw[-((end-h):end), ]
 #   left_out <- df.rv.raw[(end-h):end, ]
-#   
-#   
-#   mod <- bigtime::sparseVAR(est_data, cv = TRUE)
+# 
+# 
+#   mod <- bigtime::sparseVAR(est_data, selection = "cv")
 #   rec_fcst <- bigtime::recursiveforecast(mod, h = h)$fcst
 #   dir_fcst <- matrix(nrow = h, ncol = ncol(est_data))
-#   dir_fcst[1, ] <- bigtime::directforecast(mod, "VAR", h = 1)
+#   dir_fcst[1, ] <- bigtime::directforecast(mod, h = 1)
 #   if (h > 1){
 #     for (hh in 2:h){
-#       mod <- bigtime::sparseVAR(est_data, cv = TRUE, h = hh)
-#       dir_fcst[hh, ] <- bigtime::directforecast(mod, "VAR", h = hh)
+#       mod <- bigtime::sparseVAR(est_data, selection = "cv", h = hh)
+#       dir_fcst[hh, ] <- bigtime::directforecast(mod, h = hh)
 #     }
 #   }
-#   
+# 
 #   colnames(rec_fcst) <- paste0(colnames(est_data), "_", "rec.fcst")
 #   colnames(dir_fcst) <- paste0(colnames(est_data), "_", "dir.fcst")
 #   dat <- as_tibble(cbind(rec_fcst, dir_fcst)) %>%
@@ -493,7 +627,7 @@ plot_fcst <- function(horizon, variable, plot_last = 50){
 ```
 
 
-We can also use *sparseVAR* to forecast the realised volatility. This can be done either in a recursive manner, by estimating a standard VAR model and recursively forcasting the next observation, or through direct forecasts. In the latter case, we need to estimate a new model for each horizon that we wish to forecast. Thus, if we would like to forecast the next three trading days, we need to estimate a model that predicts the next day, a model that predicts two days into the future, and a model that predicts three days into the future. This can be done by setting the $h$ parameter in the *sparseVAR* function to the desired horizon. Although direct forecasting might sound like a lot of additional work, it is the better choice when the estimated VAR is unstable. For a detailed description of recusive and direct forecasting, please check the other [notebook](https://github.com/enweg/SnT_VARS){target="_blank"}. 
+We can also use *sparseVAR* to forecast the realised volatility. This can be done either in a recursive manner, by estimating a standard VAR model and recursively forecasting the next observation, or through direct forecasts. In the latter case, we need to estimate a new model for each horizon that we wish to forecast. Thus, if we would like to forecast the next three trading days, we need to estimate a model that predicts the next day, a model that predicts two days into the future, and a model that predicts three days into the future. This can be done by setting the $h$ parameter in the *sparseVAR* function to the desired horizon. Although direct forecasting might sound like a lot of additional work, it is the better choice when the estimated VAR is unstable. For a detailed description of recusive and direct forecasting, please check the other [notebook](https://github.com/enweg/SnT_VARS){target="_blank"}. 
 
 
 ```{r}
