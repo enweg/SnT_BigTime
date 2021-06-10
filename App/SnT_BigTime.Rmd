@@ -205,12 +205,12 @@ renderPlot({
 
 The next step in any analysis would be to build and estimate a model. We will do this using *bigtime* and more specifically using the *sparseVAR* function. This function implements both, the lasso and the *elementwise* structure above. For reasons also discussed above, we will only focus on the *elementwise* structure. Even then, *sparseVAR* still offers plenty of customisations, such as how many penalties we would like to try in the time series cross-validation procedure, whether we actually want to do time series cross-validation, and how much of the data we would like to use for estimation and how much for testing in the CV. Lastly, *sparseVAR* also offers to determine the forecasting horizon of interest. This will become important for a later section. In this section, we will not change any of the standard settings besides telling it that we want to do time series cross-validation.
 
-<p style="color:red">
-Below are the results of bootUR. We can see that some series are non-stationary while others are. Differencing only some series might be weird because the interpretation will be rather difficult. Differencing all series might also be weird because quite some are I(0) and we might hence over-difference. Solution might be to work with cointegration but not sure how this would work in a penalised setting. How would you like to continue? You used the data before, how did you handle the non-stationarity? For now I will not do anything.
-</p>
+Before we can use *sparseVAR*, we have to make sure that our time series are all stationary. To do so, we can use the package *bootUR* and its *order_integration* function with the argument *test = "BSQTtest"*. The results plotted below show that many of our time series are found to be integrated of order one, and are thus not actually stationary. A shortcoming of our sample is though that it is rather short and hence the unit-root tests are not very powerful. Literature in general finds that realised volatilities are stationary when longer time horizon are taken. We will thus continue without differencing but should keep in mind that we could not reject the null of a uni-root for a subset of the time series covered.
 
 ```{r}
-# oi <- bootUR::order_integration(df.rv.raw, plot_orders = TRUE)
+
+# oi <- bootUR::BSQTtest(df.rv.raw, q = 0:10/10)
+# oi <- bootUR::order_integration(df.rv.raw, test = "BSQTtest", q = 0:10/10)
 # saveRDS(oi, "./Data/oi.RDS")
 oi <- readRDS("./Data/oi.RDS")
 renderPlot({
@@ -666,7 +666,7 @@ Above, we show both methods for various forecasting horizons. The recursive fore
 
 * VAR models often suffer from high dimensionality, because the total number of parameters is equal to $k^2\times p$
 * Putting structure onto the DGP by emposing sparsity is one way to overcome high-dimensional problems
-* Although this introduces a bias into the estimation, the Variance-Bias trade-off tells us that if the increase is bias is small compared to the decrease in variance, there high-dimensional methods can outperform traditional methods in the MSE sense
+* Although this introduces a bias into the estimation, the Variance-Bias trade-off tells us that if the increase in bias is small compared to the decrease in variance, high-dimensional methods can outperform traditional methods in the MSE sense
 * *glmnet* cannot be used for the estimation of sparse VAR models because
     1. The sparsity pattern corresponding to the lasso is usually not sensible. A more hirachical structure is needed, such as the one enforced by the *elementwise* sparsity structure
     2. The cross-validation procedure used in *glmnet* is not appropriate for time series

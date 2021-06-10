@@ -1,13 +1,13 @@
 
-Listening on http://127.0.0.1:3684
+Listening on http://127.0.0.1:6621
 
 
 
 processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
+output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmpi1OyKX/SnT_BigTime.knit.md
 
 
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc4d553a83.html
+Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmpi1OyKX/file6d7c2bc1e9.html
 Warning: Error in <-: length of 'dimnames' [2] not equal to array extent
   171: colnames<-
   170: renderPlot [<text>#27]
@@ -16,126 +16,19 @@ Warning: Error in <-: length of 'dimnames' [2] not equal to array extent
   114: <reactive:plotObj>
    98: drawReactive
    85: renderFunc
-   84: output$outdfc3d2bf39a6f229
+   84: output$out9c36cd4482ba5212
     4: <Anonymous>
     2: rmarkdown::run
     1: start_document [#2]
 Warning: Using alpha for a discrete variable is not advised.
+geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?
+geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?
 
 
 
 processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
+output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmpi1OyKX/SnT_BigTime.knit.md
 
 
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc7fcc2901.html
+Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmpi1OyKX/file6d752df1ed0.html
 Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc2d3adb39.html
-Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc7ceadd25.html
-Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc7c860bf5.html
-Warning: Error in <-: length of 'dimnames' [2] not equal to array extent
-  171: colnames<-
-  170: renderPlot [<text>#27]
-  168: func
-  128: drawPlot
-  114: <reactive:plotObj>
-   98: drawReactive
-   85: renderFunc
-   84: output$out9d555f8ab83d0271
-    4: <Anonymous>
-    2: rmarkdown::run
-    1: start_document [#2]
-Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc72f3caf1.html
-Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc47e619e6.html
-Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc45aa8cd8.html
-Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc574f7642.html
-Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc4b8ced6e.html
-Warning: Using alpha for a discrete variable is not advised.
-
-
-
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/RtmptoObqh/file6cc7d026b13.html
-Warning: Error in <-: length of 'dimnames' [2] not equal to array extent
-  171: colnames<-
-  170: renderPlot [<text>#27]
-  168: func
-  128: drawPlot
-  114: <reactive:plotObj>
-   98: drawReactive
-   85: renderFunc
-   84: output$outee63c732ea742238
-    4: <Anonymous>
-    2: rmarkdown::run
-    1: start_document [#2]
-Warning: Using alpha for a discrete variable is not advised.
-
-
-Warning message:
-In sink() : no sink to remove
