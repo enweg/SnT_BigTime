@@ -10,6 +10,7 @@ This repository contains an interactive notebook explaining the R-library `bigti
 
 
 > *bigtime* can be found on CRAN and on [Github](https://github.com/ineswilms/bigtime)
+
 > This work was done during my student assistantship under Ines Wilms and was supported through the Elinor Ostrom Grant.
 
 ## Using the Notebook
