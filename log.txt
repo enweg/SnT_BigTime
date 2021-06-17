@@ -1,13 +1,13 @@
 
-Listening on http://127.0.0.1:6621
+Listening on http://127.0.0.1:3657
 
 
 
 processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmpi1OyKX/SnT_BigTime.knit.md
+output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmp4cZU2J/SnT_BigTime.knit.md
 
 
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmpi1OyKX/file6d7c2bc1e9.html
+Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmp4cZU2J/file165887d4a53a3.html
 Warning: Error in <-: length of 'dimnames' [2] not equal to array extent
   171: colnames<-
   170: renderPlot [<text>#27]
@@ -16,19 +16,12 @@ Warning: Error in <-: length of 'dimnames' [2] not equal to array extent
   114: <reactive:plotObj>
    98: drawReactive
    85: renderFunc
-   84: output$out9c36cd4482ba5212
+   84: output$outab16132a05f514ec
     4: <Anonymous>
     2: rmarkdown::run
     1: start_document [#2]
 Warning: Using alpha for a discrete variable is not advised.
-geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?
-geom_path: Each group consists of only one observation. Do you need to adjust the group aesthetic?
-
 
 
-processing file: SnT_BigTime.Rmd
-output file: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmpi1OyKX/SnT_BigTime.knit.md
-
-
-Output created: /private/var/folders/_j/nyvvfcq94rsdcl0dqn5c5tpr0000gn/T/Rtmpi1OyKX/file6d752df1ed0.html
-Warning: Using alpha for a discrete variable is not advised.
+Warning message:
+In sink() : no sink to remove
