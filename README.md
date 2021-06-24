@@ -20,7 +20,7 @@ The interactive notebook can be used in various forms. The easiest is to open th
 > Please be aware that the loading process can take a while. By clicking on the *show* button, you can see what is going on.
 
 
-1. Notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/enweg/SnT_VARS/main?urlpath=shiny/App/)
+1. Notebook: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/enweg/SnT_BigTime/main?urlpath=shiny/App/)
 
 The second way to use the notebook is to download the repository and to start the notebook locally. This is also the only option that does not require any internet connection. Since this is the more complicated way, below is a more detailed description on how this can be done:
 
